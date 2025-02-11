@@ -55,7 +55,7 @@
                 const linksList = document.getElementById('links-list');
                 linksList.innerHTML = '';
 
-                data.keys.forEach(link => {
+                data.forEach(link => {
                     const linkItem = document.createElement('div');
                     linkItem.className = 'link-item';
                     linkItem.textContent = link.link;
