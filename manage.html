@@ -23,6 +23,7 @@
             margin-bottom: 10px;
             border-radius: 4px;
             box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            display: flex;
         }
     </style>
 </head>
@@ -59,6 +60,11 @@
                     const linkItem = document.createElement('div');
                     linkItem.className = 'link-item';
                     linkItem.textContent = link.link;
+                    // 展示图片
+                    const img = document.createElement('img');
+                    img.src = link.link;
+                    img.style.width = '30%';
+                    linkItem.appendChild(img);
                     linksList.appendChild(linkItem);
                 });
             } else {
