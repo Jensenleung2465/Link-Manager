@@ -1,9 +1,9 @@
 // 定义 KV 命名空间（通过环境变量绑定）
-const LINKS_KV = env.LINKS_KV; // 替换为你的 KV 命名空间
+let LINKS_KV = ''; // 替换为你的 KV 命名空间
 
 // 定义管理员用户名和密码（实际应用中应使用更安全的鉴权方式）
-const ADMIN_USERNAME = env.ADMIN_USERNAME || 'admin';
-const ADMIN_PASSWORD = env.ADMIN_PASSWORD || 'admin';
+let ADMIN_USERNAME = '';
+let ADMIN_PASSWORD = '';
 
 // 鉴权中间件
 async function authenticate(request) {
@@ -54,8 +54,12 @@ async function handlePost(request) {
 
 // 主处理函数
 export async function onRequest(context) {
-    const { request } = context;
+    const { request, env } = context;
     const { method } = request;
+
+    LINKS_KV = env.LINKS_KV;
+    ADMIN_USERNAME = env.ADMIN_USERNAME;
+    ADMIN_PASSWORD = env.ADMIN_PASSWORD;
 
     switch (method) {
         case 'GET':
