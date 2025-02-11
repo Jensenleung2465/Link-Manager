@@ -26,7 +26,14 @@ async function handleGet(request) {
         return new Response('Unauthorized', { status: 401 });
     }
 
-    const links = await LINKS_KV.list();
+    const linksKey = await LINKS_KV.list();
+
+    const links = [];
+    for (const { name } of linksKey.keys) {
+        const link = await LINKS_KV.get(name);
+        links.push({ id: name, link: link });
+    }
+
     return new Response(JSON.stringify(links), {
         headers: { 'Content-Type': 'application/json' },
     });
