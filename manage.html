@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Links</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f4f4f9;
+        }
+        h1 {
+            text-align: center;
+        }
+        .links-list {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .link-item {
+            background: white;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 4px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Manage Links</h1>
+    <div class="links-list" id="links-list">
+        <!-- Links will be dynamically inserted here -->
+    </div>
+
+    <script>
+        async function fetchLinks() {
+            const credentials = localStorage.getItem('credentials'); // 从 localStorage 获取鉴权信息
+
+            if (!credentials) {
+                alert('Please login first.');
+                window.location.href = 'auth.html';
+                return;
+            }
+
+            // 发送 GET 请求到 Cloudflare Worker
+            const response = await fetch('/api', {
+                method: 'GET',
+                headers: {
+                    'Authorization': `Basic ${credentials}`
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                const linksList = document.getElementById('links-list');
+                linksList.innerHTML = '';
+
+                data.keys.forEach(link => {
+                    const linkItem = document.createElement('div');
+                    linkItem.className = 'link-item';
+                    linkItem.textContent = link.name;
+                    linksList.appendChild(linkItem);
+                });
+            } else {
+                alert('Failed to fetch links.');
+            }
+        }
+
+        // 页面加载时获取链接
+        fetchLinks();
+    </script>
+</body>
+</html>
