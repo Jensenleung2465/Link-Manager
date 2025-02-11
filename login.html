@@ -70,7 +70,10 @@
             })
             .then(response => {
                 if (response.ok) {
-                    // 登录成功，跳转到管理页面
+                    // 登录成功，保存 credentials 到 localStorage
+                    localStorage.setItem('credentials', credentials);
+
+                    // 跳转到管理页面
                     window.location.href = 'manage.html';
                 } else {
                     alert('Login failed. Please check your credentials.');

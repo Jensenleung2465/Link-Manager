@@ -2,8 +2,8 @@
 const LINKS_KV = env.LINKS_KV; // 替换为你的 KV 命名空间
 
 // 定义管理员用户名和密码（实际应用中应使用更安全的鉴权方式）
-const ADMIN_USERNAME = 'admin';
-const ADMIN_PASSWORD = 'password';
+const ADMIN_USERNAME = env.ADMIN_USERNAME || 'admin';
+const ADMIN_PASSWORD = env.ADMIN_PASSWORD || 'admin';
 
 // 鉴权中间件
 async function authenticate(request) {
