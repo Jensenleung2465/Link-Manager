@@ -1,9 +1,9 @@
 // 定义 KV 命名空间（通过环境变量绑定）
-let LINKS_KV = ''; // 替换为你的 KV 命名空间
+let LINKS_KV = 'LINKS_KV'; // 替换为你的 KV 命名空间
 
 // 定义管理员用户名和密码（实际应用中应使用更安全的鉴权方式）
-let ADMIN_USERNAME = '';
-let ADMIN_PASSWORD = '';
+let ADMIN_USERNAME = 'admin';
+let ADMIN_PASSWORD = 'Admin1234Y?@';
 
 // 鉴权中间件
 async function authenticate(request) {
